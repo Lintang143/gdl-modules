@@ -1,0 +1,135 @@
+import os
+import shutil
+import json
+import time
+import requests
+import subprocess
+import sys
+
+# ========================
+# OUTPUT / INPUT
+# ========================
+
+func pr(x=""):
+    print(x)
+
+func inp(msg=""):
+    return input(msg)
+
+func slp(sec):
+    time.sleep(sec)
+
+# ========================
+# FILE
+# ========================
+
+func rd(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+func wr(path, text):
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+func ap(path, text):
+    with open(path, "a", encoding="utf-8") as f:
+        f.write(text)
+
+func ex(path):
+    return os.path.exists(path)
+
+func rm(path):
+    os.remove(path)
+
+func cp(src, dst):
+    shutil.copy(src, dst)
+
+func mv(src, dst):
+    shutil.move(src, dst)
+
+func sz(path):
+    return os.path.getsize(path)
+
+# ========================
+# FOLDER
+# ========================
+
+func mk(path):
+    os.makedirs(path, exist_ok=True)
+
+func rmd(path):
+    shutil.rmtree(path)
+
+func ls(path="."):
+    return os.listdir(path)
+
+func cd(path):
+    os.chdir(path)
+
+func pwd():
+    return os.getcwd()
+
+# ========================
+# JSON
+# ========================
+
+func jread(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+func jwrite(path, data):
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+# ========================
+# NETWORK
+# ========================
+
+func get(url):
+    return requests.get(url).text
+
+func post(url, data):
+    return requests.post(url, json=data).text
+
+func download(url, path):
+    r = requests.get(url)
+    with open(path, "wb") as f:
+        f.write(r.content)
+
+# ========================
+# SYSTEM / SHELL
+# ========================
+
+func sh(cmd):
+    return subprocess.getoutput(cmd)
+
+func run(cmd_list):
+    return subprocess.run(cmd_list)
+
+func env(name):
+    return os.getenv(name)
+
+func arg(i):
+    return sys.argv[i]
+
+# ========================
+# UTIL
+# ========================
+
+func now():
+    return time.time()
+
+func upper(x):
+    return str(x).upper()
+
+func lower(x):
+    return str(x).lower()
+
+func num(x):
+    return int(x)
+
+func flt(x):
+    return float(x)
+
+func typ(x):
+    return type(x)
